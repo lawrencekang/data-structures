@@ -1,0 +1,136 @@
+<!doctype html>
+<meta charset="utf8">
+<html>
+
+<head>
+  <style>
+    body {
+      width: 120%;
+      margin: 0;
+      padding: 0;
+    }
+    iframe {
+      width: 24%;
+      border-width: 0;
+    }
+  </style>
+
+  <script>
+    var pseudoQueue = function(val) {
+
+      var Queue = function() {
+        this.sizeVal = 0;
+        this.firstKey = 0;
+        this.storage = {};
+      };
+
+      Queue.prototype = {
+        constructor: Queue,
+        enqueue: function(val) {
+          this.storage[this.sizeVal] = val;
+          this.sizeVal++;
+        },
+        dequeue: function() {
+          var result = this.storage[this.firstKey];
+          delete this.storage[this.firstKey];
+          if (this.sizeVal < this.firstKey) {
+            this.sizeVal = this.firstKey
+          }
+          this.firstKey++;
+          return result;
+        },
+        size: function() {
+          if (this.sizeVal >= this.firstKey) {
+            return this.sizeVal - this.firstKey
+          }
+          return 0
+        }
+      }
+
+      for (var i = 0; i < val; i++) {
+        var q = "q" + i;
+        q = new Queue();
+      }
+    }
+
+    var pseudoStack = function(val) {
+
+      var Stack = function(objName) {
+        this.sizeVal = 0;
+        this.storage = {};
+      };
+
+      Stack.prototype = {
+        constructor: Stack,
+        push: function(val) {
+          this.storage[this.sizeVal] = val;
+          this.sizeVal++;
+        },
+        pop: function() {
+          if (this.sizeVal > 0) {
+            this.sizeVal--;
+          }
+          var result = this.storage[this.sizeVal];
+          delete this.storage[this.sizeVal];
+          return result;
+        },
+        size: function() {
+          return this.sizeVal;
+        }
+      }
+
+      for (var i = 0; i < val; i++) {
+        var q = "q" + i;
+        q = new Stack();
+      }
+    }
+
+    var protoQueue = function(val) {
+      var makeQueue = function() {
+        var someInstance = Object.create(queueMethods);
+
+        someInstance.storage = {};
+        someInstance.sizeVal = 0;
+        someInstance.firstKey = 0;
+
+        return someInstance
+      };
+
+      var queueMethods = {
+        enqueue: function(val) {
+          this.storage[this.sizeVal] = val;
+          if (this.sizeVal < this.firstKey) {
+            this.sizeVal = this.firstKey
+          };
+          this.sizeVal++;
+        },
+        dequeue: function() {
+          var result = this.storage[this.firstKey];
+          delete this.storage[this.firstKey];
+          this.firstKey++;
+          return result;
+        },
+        size: function() {
+          if (this.sizeVal >= this.firstKey) {
+            return this.sizeVal - this.firstKey;
+          }
+          return 0
+        }
+      };
+
+      for (var i = 0; i < val; i++) {
+        var q = "q" + i;
+        q = new makeQueue();
+      }
+    }
+
+    protoQueue(10000000);
+    //pseudoStack(10000000)
+    //pseudoQueue(10000000);
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
