@@ -15,7 +15,11 @@ describe('graph', function() {
   });
 
   it('should store values as nodes that were inserted', function() {
+        debugger;
     graph.addNode('kittens');
+    graph.addNode('puppies');
+    graph.addNode('birds', 'kittens');
+    graph.addNode('snakes', 'puppies');
     graph.contains('kittens');
     expect(graph.contains('kittens')).to.equal(true);
   });
